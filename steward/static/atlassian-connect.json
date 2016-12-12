@@ -1,0 +1,90 @@
+{{define "config"}}
+{
+  "name": "Steward",
+  "description": "A hipchat bot that can trigger jenkins builds",
+  "key": "Steward-addon",
+  "links": {
+    "homepage": "{{.LocalBaseUrl}}/atlassian-connect.json",
+    "self": "{{.LocalBaseUrl}}/atlassian-connect.json"
+  },
+  "vendor": {
+    "name": "Brian McQueen",
+    "url": "http://none.com"
+  },
+  "capabilities": {
+    "webhook" : [
+      {
+        "event": "room_message",
+        "pattern": "^sayhello",
+        "url"   : "{{.LocalBaseUrl}}/hook",
+        "name" : "healthcheck"
+      }, 
+      {
+        "event": "room_message",
+        "pattern": "^!build",
+        "url"     : "{{.LocalBaseUrl}}/build",
+        "name"  : "Build job"
+      },
+      {
+        "event": "room_message",
+        "pattern": "^!rebuild",
+        "url": "{{.LocalBaseUrl}}/rebuild",
+        "name" :"rebuild"
+      },
+      {
+        "event": "room_message",
+        "pattern": "^!getJobConfig",
+        "url": "{{.LocalBaseUrl}}/getJobConfig",
+        "name" :"getConfig"
+      },
+      {
+        "event": "room_message",
+        "pattern": "^!addPreset",
+        "url": "{{.LocalBaseUrl}}/addPreset",
+        "name" :"addPreset"
+      },
+      {
+        "event": "room_message",
+        "pattern": "^!updatePreset",
+        "url": "{{.LocalBaseUrl}}/updatePreset",
+        "name" :"updatePreset"
+      },
+      {
+        "event": "room_message",
+        "pattern": "^!listPreset",
+        "url": "{{.LocalBaseUrl}}/listPreset",
+        "name" :"listPreset"
+      },
+      {
+        "event": "room_message",
+        "pattern": "^!getUserId$",
+        "url": "{{.LocalBaseUrl}}/getUserId",
+        "name" :"getUserId"
+      },
+      {
+        "event": "room_message",
+        "pattern": "^!addUser",
+        "url": "{{.LocalBaseUrl}}/addUser",
+        "name" :"addUser"
+      },
+      {
+        "event": "room_message",
+        "pattern": "^!help",
+        "url": "{{.LocalBaseUrl}}/help",
+        "name": "help"
+      }
+    ],
+    "hipchatApiConsumer": {
+      "fromName": "Steward",
+      "scopes": [
+        "send_notification"
+      ]
+    },
+    "installable": {
+      "allowGlobal": false,
+      "allowRoom": true,
+      "callbackUrl": "{{.LocalBaseUrl}}/installed"
+    }
+  }
+}
+{{end}}
